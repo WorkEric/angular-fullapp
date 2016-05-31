@@ -1,8 +1,12 @@
 /*'use strict'*/
 
 angular.module('spBlogger.admin.controllers',[])
-    .controller('AdminController',['$scope', function($scope){
-
+    .controller('AdminController',['$scope', 'authService', '$state', function($scope, authService, $state){
+        $scope.logout = function(){
+            authService.logout().then(function(){
+                $state.go('login');
+            });
+        }
     }]).controller('PostCreationController', ['$scope', '$state', 'Post', function($scope, $state, Post){
     	$scope.post = new Post();
     	$scope.buttonText = "Create";
@@ -33,4 +37,17 @@ angular.module('spBlogger.admin.controllers',[])
     			});
     		}
     	}
-    }]);
+    }]).controller('LoginController', ['$scope', 'authService', '$state', function($scope, authService, $state){
+        $scope.buttonText = "Login";
+        $scope.login = function(){
+            $scope.buttonText = "Logging in ...";
+            authService.login($scope.credentials.username, $scope.credentials.password).then(function(data){
+                $state.go('admin.postViewAll');
+            }, function(err){
+                $scope.invalidLogin = true
+            }).finally(function(){
+                $scope.buttonText = "Login";
+            })
+        };
+
+    }])

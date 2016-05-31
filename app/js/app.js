@@ -1,6 +1,6 @@
 //'use strict';
 
-angular.module('spBlogger',['ngResource', 'ui.router','spBlogger.posts', 'spBlogger.admin', 'pascalprecht.translate'])
+angular.module('spBlogger',['ngCookies', 'ngResource', 'ui.router','spBlogger.posts', 'spBlogger.admin', 'pascalprecht.translate'])
 	.run(['$state', '$rootScope', '$translate',
 		function($state, $rootScope, $translate){
 			$state.go('allPosts');

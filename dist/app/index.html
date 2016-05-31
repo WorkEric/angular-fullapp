@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <base href="/app/">
   <title>The Single Page Blogger</title>
+  
   <link rel="stylesheet" href="built/app.min.css"/>
 
 </head>
@@ -11,8 +12,12 @@
   <div class="container">
     <br/>
     <div class="jumbotron text-center">
-        <h1>The Single Page Blogger</h1>
-        <p>One stop blogging solution</p>
+        <h1>{{'TITLE' | translate}}</h1>
+        <p>{{'SUBTITLE' | translate}}</p>
+        <div class="btn-group btn-toggle">
+          <button class="btn btn-xs btn-default" ng-class="{en: 'active'}[languagePreference.currentLanguage]" ng-click="languagePreference.switchLanguage('en')" >English</button>
+          <button class="btn btn-xs btn-primary" ng-class="{de: 'active'}[languagePreference.currentLanguage]" ng-click="languagePreference.switchLanguage('de')" >German</button>
+        </div>
     </div>
     <div ui-view></div>
     <div class="row footer">
@@ -21,8 +26,10 @@
         </div>
     </div>
   </div>
+
+
 </body>
+
   <script src="built/app.min.js"></script>
   
-
 </html>
